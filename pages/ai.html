@@ -1,1 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Generator</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+```
+<!-- Navbar -->
+<header>
+    <nav class="navbar">
+        <div class="logo">AI Assets Hub</div>
+
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="assets.html">Assets</a></li>
+            <li><a href="ai.html">AI Generator</a></li>
+        </ul>
+
+        <div class="menu-btn" id="menuBtn">☰</div>
+    </nav>
+</header>
+
+<!-- AI Generator Section -->
+<section class="hero">
+    <h1>Create Assets with AI</h1>
+    <p>Generate PNG, JPG, Transparent Assets and 3D Concepts instantly</p>
+
+    <!-- Prompt Input -->
+    <div class="ai-box">
+        <textarea id="promptInput" placeholder="Describe your asset..."></textarea>
+
+        <!-- Style Select -->
+        <select id="styleSelect">
+            <option value="realistic">Realistic</option>
+            <option value="cartoon">Cartoon</option>
+            <option value="3d">3D Model</option>
+            <option value="minimal">Minimal</option>
+        </select>
+
+        <!-- Transparent Toggle -->
+        <label class="toggle-box">
+            <input type="checkbox" id="transparentBg">
+            Transparent Background
+        </label>
+
+        <!-- Generate Button -->
+        <button id="generateBtn">Generate</button>
+    </div>
+
+    <!-- Loader -->
+    <div id="loader" style="display:none; margin-top:20px;">
+        <p>Generating your asset...</p>
+    </div>
+
+    <!-- Output Preview -->
+    <div id="outputBox" style="display:none; margin-top:30px;">
+        <img id="generatedImage" src="../assets/previews/sample1.png" alt="Generated Output">
+        <br><br>
+        <button id="downloadBtn">Download</button>
+    </div>
+
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>© 2026 AI Assets Hub | All Rights Reserved</p>
+</footer>
+
+<script src="../script.js"></script>
+<script src="../js/ai.js"></script>
+```
+
+</body>
+</html>
 
