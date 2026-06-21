@@ -1,1 +1,12 @@
-
+[
+  {
+    "src": "assets/png/coin.png",
+    "name": "Coin",
+    "desc": "Game currency icon"
+  },
+  {
+    "src": "assets/png/dice.png",
+    "name": "Dice",
+    "desc": "Ludo dice"
+  }
+]
