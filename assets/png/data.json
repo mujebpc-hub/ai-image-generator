@@ -5,8 +5,8 @@
     "desc": "Game currency icon"
   },
   {
-    "src": "assets/png/dice.png",
-    "name": "Dice",
+    "src": "folder.png/png/dice-1.png.png",
+    "name": "Dice face one",
     "desc": "Ludo dice"
   }
 ]
