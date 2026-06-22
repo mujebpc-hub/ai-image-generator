@@ -8,18 +8,19 @@ fetch("../data/assets.json")
 
         const card = document.createElement("div");
         card.classList.add("asset-card");
-        card.setAttribute("data-name", asset.name);
-        card.setAttribute("data-type", asset.type);
+        card.setAttribute("data-name", asset.title.toLowerCase());
 
         card.innerHTML = `
-            <img src="${asset.image}" alt="${asset.name}">
-            <h3>${asset.name}</h3>
+            <img src="${asset.cover}" alt="${asset.title}">
+            <h3>${asset.title}</h3>
             <a href="preview.html?id=${asset.id}">
                 <button>View</button>
             </a>
         `;
 
         container.appendChild(card);
+
     });
 
-});
+})
+.catch(error => console.log(error));
