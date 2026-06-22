@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assets Hub</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/assets.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <nav>
+            <div class="logo">AI Assets Hub</div>
+
+            <div id="menuBtn">☰</div>
+
+            <ul id="navLinks">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="assets.html">Assets</a></li>
+                <li><a href="ai.html">AI Generator</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Search -->
+    <section class="search-section">
+        <input type="text" id="searchInput" placeholder="Search PNG, JPG, 3D Models...">
+    </section>
+
+    <!-- Category Filter -->
+    <section class="filter-section">
+        <button data-filter="all">All</button>
+        <button data-filter="png">PNG</button>
+        <button data-filter="jpg">JPG</button>
+        <button data-filter="3d">3D</button>
+    </section>
+
+    <!-- Assets Grid -->
+    <section class="assets-grid" id="assetsContainer">
+    </section>
+
+    <script src="../js/menu.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/assets.js"></script>
+
+</body>
+</html>
