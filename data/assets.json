@@ -1,13 +1,13 @@
 [
   {
     "id": 1,
-    "title": "Golden Crown PNG",
+    "title": "ludo dice",
     "category": "png",
 
     "cover": "assets/covers/crown-cover.webp",
-    "preview": "assets/png/crown.png",
+    "preview": "assets/png/dice-1.png.png",
 
-    "download_low": "assets/png/crown-low.png",
-    "download_high": "assets/png/crown.png"
+    "download_low": "assets/png/dice-1.png.png",
+    "download_high": "assets/png/dice-1.png.png"
   }
 ]
