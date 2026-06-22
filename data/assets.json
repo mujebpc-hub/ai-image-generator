@@ -1,1 +1,23 @@
-
+[
+    {
+        "id": 1,
+        "name": "Golden Crown",
+        "type": "png",
+        "image": "../assets/png/crown.png",
+        "highQuality": "../assets/hq/crown-hq.png"
+    },
+    {
+        "id": 2,
+        "name": "Royal Dice",
+        "type": "png",
+        "image": "../assets/png/dice.png",
+        "highQuality": "../assets/hq/dice-hq.png"
+    },
+    {
+        "id": 3,
+        "name": "Dark Background",
+        "type": "jpg",
+        "image": "../assets/jpg/bg1.jpg",
+        "highQuality": "../assets/hq/bg1-hq.jpg"
+    }
+]
