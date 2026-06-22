@@ -1,13 +1,13 @@
 const searchInput = document.getElementById("searchInput");
-const assetCards = document.querySelectorAll(".asset-card");
 
 searchInput.addEventListener("keyup", function () {
-    let value = this.value.toLowerCase();
+    const value = this.value.toLowerCase();
+    const cards = document.querySelectorAll(".asset-card");
 
-    assetCards.forEach(card => {
-        let title = card.dataset.name.toLowerCase();
+    cards.forEach(card => {
+        const title = card.dataset.name.toLowerCase();
 
-        if (title.includes(value)) {
+        if(title.includes(value)){
             card.style.display = "block";
         } else {
             card.style.display = "none";
