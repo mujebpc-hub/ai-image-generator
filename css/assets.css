@@ -33,8 +33,9 @@
     width:90%;
     margin:auto;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:25px;
+    grid-template-columns:repeat(auto-fit,minmax(180px,220px));
+    gap:20px;
+    justify-content:center;
     padding:30px 0;
 }
 
@@ -43,23 +44,30 @@
     border-radius:15px;
     padding:15px;
     text-align:center;
+    transition:0.3s;
+    width:220px;
+}
+
+.asset-card:hover{
+    transform:translateY(-5px);
 }
 
 .asset-card img{
     width:100%;
-    height:220px;
-    object-fit:cover;
+    height:180px;
+    object-fit:contain;
+    background:#1a1a1a;
     border-radius:12px;
+    padding:10px;
 }
 
 .asset-card h3{
-    margin:15px 0;
+    margin:12px 0;
+    font-size:16px;
+    min-height:40px;
 }
 
 .asset-card button{
-    padding:10px 20px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
+    width:100%;
+    padding:10px;
 }
