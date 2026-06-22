@@ -1,13 +1,56 @@
 [
   {
     "id": 1,
-    "title": "ludo dice",
+    "title": "Dice 1 PNG",
     "category": "png",
-
-    "cover": "assets/covers/dice-1.png.png",
-    "preview": "assets/png/dice-1.png.png",
-
-    "download_low": "assets/png/dice-1.png.png",
-    "download_high": "assets/png/dice-1.png.png"
+    "cover": "../assets/covers/dice-1.png.png",
+    "preview": "../assets/png/dice-1.png.png",
+    "download_low": "../assets/png/dice-1.png.png",
+    "download_high": "../assets/png/dice-1.png.png"
+  },
+  {
+    "id": 2,
+    "title": "Dice 2 PNG",
+    "category": "png",
+    "cover": "../assets/covers/dice-2.png.png",
+    "preview": "../assets/png/dice-2.png.png",
+    "download_low": "../assets/png/dice-2.png.png",
+    "download_high": "../assets/png/dice-2.png.png"
+  },
+  {
+    "id": 3,
+    "title": "Dice 3 PNG",
+    "category": "png",
+    "cover": "../assets/covers/dice-3.png.png",
+    "preview": "../assets/png/dice-3.png.png",
+    "download_low": "../assets/png/dice-3.png.png",
+    "download_high": "../assets/png/dice-3.png.png"
+  },
+  {
+    "id": 4,
+    "title": "Dice 4 PNG",
+    "category": "png",
+    "cover": "../assets/covers/dice-4.png.png",
+    "preview": "../assets/png/dice-4.png.png",
+    "download_low": "../assets/png/dice-4.png.png",
+    "download_high": "../assets/png/dice-4.png.png"
+  },
+  {
+    "id": 5,
+    "title": "Dice 5 PNG",
+    "category": "png",
+    "cover": "../assets/covers/dice-5.png.png",
+    "preview": "../assets/png/dice-5.png.png",
+    "download_low": "../assets/png/dice-5.png.png",
+    "download_high": "../assets/png/dice-5.png.png"
+  },
+  {
+    "id": 6,
+    "title": "Dice 6 PNG",
+    "category": "png",
+    "cover": "../assets/covers/dice-6.png.png",
+    "preview": "../assets/png/dice-6.png.png",
+    "download_low": "../assets/png/dice-6.png.png",
+    "download_high": "../assets/png/dice-6.png.png"
   }
 ]
