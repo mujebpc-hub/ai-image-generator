@@ -1,33 +1,51 @@
-const searchInput = document.getElementById("searchInput");
-const filterButtons = document.querySelectorAll(".filter-btn");
-const cards = document.querySelectorAll(".asset-card");
+function getCards(){
+    return document.querySelectorAll(".asset-card");
+}
 
-if(searchInput){
-    searchInput.addEventListener("keyup", function () {
+// ---------------- SEARCH ----------------
+const searchInput = document.getElementById("searchInput");
+
+if (searchInput) {
+
+    searchInput.addEventListener("input", function () {
+
         const value = this.value.toLowerCase();
 
-        document.querySelectorAll(".asset-card").forEach(card => {
-            const name = card.dataset.name;
+        getCards().forEach(card => {
 
-            if(name.includes(value)){
+            const name = card.dataset.name || "";
+
+            if (name.includes(value)) {
                 card.style.display = "block";
             } else {
                 card.style.display = "none";
             }
         });
+
     });
 }
 
+
+// ---------------- FILTER ----------------
+const filterButtons = document.querySelectorAll(".filter-btn");
+
 filterButtons.forEach(button => {
+
     button.addEventListener("click", () => {
+
         const filter = button.dataset.filter;
 
-        document.querySelectorAll(".asset-card").forEach(card => {
-            if(filter === "all" || card.dataset.category === filter){
+        getCards().forEach(card => {
+
+            const type = card.dataset.type || card.dataset.category || "all";
+
+            if (filter === "all" || type === filter) {
                 card.style.display = "block";
             } else {
                 card.style.display = "none";
             }
         });
+
     });
+
 });
