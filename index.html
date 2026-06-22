@@ -1,33 +1,28 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Assets Hub</title>
-    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-```
-<!-- Navbar -->
 <header>
     <nav class="navbar">
         <div class="logo">AI Assets Hub</div>
 
-        <ul class="nav-links">
+        <ul class="nav-links" id="navLinks">
             <li><a href="index.html">Home</a></li>
             <li><a href="pages/assets.html">Assets</a></li>
             <li><a href="pages/ai.html">AI Generator</a></li>
         </ul>
 
-        <div class="menu-btn" id="menuBtn">
-            ☰
-        </div>
+        <div class="menu-btn" id="menuBtn">☰</div>
     </nav>
 </header>
 
-<!-- Hero Section -->
 <section class="hero">
     <h1>Find Premium Assets & Generate AI Designs</h1>
     <p>PNG, JPG, 3D Models, Transparent Assets and AI Generated Content</p>
@@ -38,7 +33,6 @@
     </div>
 </section>
 
-<!-- Categories -->
 <section class="categories">
     <h2>Popular Categories</h2>
 
@@ -52,87 +46,26 @@
     </div>
 </section>
 
-<!-- PNG Assets -->
 <section class="assets-section">
-    <h2>PNG Assets</h2>
+    <h2>Latest Assets</h2>
 
-    <div class="asset-grid">
-        <div class="asset-card">
-            <img src="assets/previews/sample1.png" alt="">
-            <p>PNG Asset 1</p>
-        </div>
-
-        <div class="asset-card">
-            <img src="assets/previews/sample2.png" alt="">
-            <p>PNG Asset 2</p>
-        </div>
-
-        <div class="asset-card">
-            <img src="assets/previews/sample3.png" alt="">
-            <p>PNG Asset 3</p>
-        </div>
+    <div class="asset-grid" id="assetContainer">
     </div>
 </section>
 
-<!-- JPG Assets -->
-<section class="assets-section">
-    <h2>JPG Assets</h2>
-
-    <div class="asset-grid">
-        <div class="asset-card">
-            <img src="assets/previews/sample4.jpg" alt="">
-            <p>JPG Asset 1</p>
-        </div>
-
-        <div class="asset-card">
-            <img src="assets/previews/sample5.jpg" alt="">
-            <p>JPG Asset 2</p>
-        </div>
-
-        <div class="asset-card">
-            <img src="assets/previews/sample6.jpg" alt="">
-            <p>JPG Asset 3</p>
-        </div>
-    </div>
-</section>
-
-<!-- 3D Models -->
-<section class="assets-section">
-    <h2>3D Models</h2>
-
-    <div class="asset-grid">
-        <div class="asset-card">
-            <img src="assets/previews/model1.png" alt="">
-            <p>3D Model 1</p>
-        </div>
-
-        <div class="asset-card">
-            <img src="assets/previews/model2.png" alt="">
-            <p>3D Model 2</p>
-        </div>
-
-        <div class="asset-card">
-            <img src="assets/previews/model3.png" alt="">
-            <p>3D Model 3</p>
-        </div>
-    </div>
-</section>
-
-<!-- AI Generator Banner -->
 <section class="ai-banner">
     <h2>Create Custom Assets with AI</h2>
-    <p>Generate your own PNG, JPG, Transparent Background, and 3D Concepts instantly.</p>
-    <button onclick="openAI()">Generate Now</button>
+    <p>Generate PNG, JPG, Transparent Background and 3D concepts instantly.</p>
+    <button onclick="window.location.href='pages/ai.html'">Generate Now</button>
 </section>
 
-<!-- Footer -->
 <footer>
     <p>© 2026 AI Assets Hub | All Rights Reserved</p>
 </footer>
 
-<script src="script.js"></script>
-```
+<script src="js/menu.js"></script>
+<script src="js/search.js"></script>
+<script src="js/assets.js"></script>
 
 </body>
 </html>
-
