@@ -11,12 +11,19 @@ fetch("../data/assets.json")
         card.setAttribute("data-name", asset.title.toLowerCase());
 
         card.innerHTML = `
-            <img src="${asset.cover}" alt="${asset.title}">
-            <h3>${asset.title}</h3>
-            <a href="preview.html?id=${asset.id}">
-                <button>View</button>
-            </a>
-        `;
+    <img src="${asset.cover}" alt="${asset.title}">
+    <h3>${asset.title}</h3>
+
+    <div style="display:flex; gap:8px; flex-direction:column;">
+        <a href="${asset.cover}" download>
+            <button>Download</button>
+        </a>
+
+        <a href="preview.html?id=${asset.id}">
+            <button>View</button>
+        </a>
+    </div>
+`;
 
         container.appendChild(card);
 
