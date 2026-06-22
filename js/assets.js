@@ -1,33 +1,70 @@
-const container = document.getElementById("assetsContainer");
+const container =
+    document.getElementById("assetsContainer") ||
+    document.getElementById("assetContainer");
 
-fetch("../data/assets.json")
+let allAssets = [];
+
+// ⚡ FIXED PATH (IMPORTANT)
+fetch("./data/assets.json")
 .then(response => response.json())
 .then(data => {
 
-    data.forEach(asset => {
+    allAssets = data;
+    window.assetsData = data;
 
-        const card = document.createElement("div");
-        card.classList.add("asset-card");
-        card.setAttribute("data-name", asset.title.toLowerCase());
+    const isHome = document.getElementById("assetContainer") !== null;
 
-        card.innerHTML = `
-    <img src="${asset.cover}" alt="${asset.title}">
-    <h3>${asset.title}</h3>
+    // -----------------------------
+    // ✅ HOME PAGE LOGIC
+    // -----------------------------
+    if (isHome) {
 
-    <div style="display:flex; gap:8px; flex-direction:column;">
-        <a href="${asset.cover}" download>
-            <button>Download</button>
-        </a>
+        container.innerHTML = "";
 
-        <a href="preview.html?id=${asset.id}">
-            <button>View</button>
-        </a>
-    </div>
-`;
+        const randomAssets = data
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 8);
 
-        container.appendChild(card);
+        randomAssets.forEach(renderCard);
 
-    });
+        return; // STOP HERE for home page
+    }
+
+    // -----------------------------
+    // ✅ ASSETS PAGE LOGIC
+    // -----------------------------
+    data.forEach(renderCard);
 
 })
 .catch(error => console.log(error));
+
+
+// -----------------------------
+// 🔥 CARD RENDER FUNCTION
+// -----------------------------
+function renderCard(asset) {
+
+    const card = document.createElement("div");
+    card.classList.add("asset-card");
+
+    card.setAttribute("data-name", asset.title.toLowerCase());
+
+    card.innerHTML = `
+        <img src="${asset.cover}" alt="${asset.title}">
+        <h3>${asset.title}</h3>
+
+        <div style="display:flex; gap:8px; flex-direction:column;">
+
+            <a href="${asset.cover}" download>
+                <button>Download</button>
+            </a>
+
+            <a href="pages/preview.html?id=${asset.id}">
+                <button>View</button>
+            </a>
+
+        </div>
+    `;
+
+    container.appendChild(card);
+}
