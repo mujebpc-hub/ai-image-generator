@@ -7,26 +7,34 @@ fetch("../data/assets.json")
 
     const asset = data.find(item => item.id == id);
 
-    document.getElementById("previewImg").src = asset.image;
-    document.getElementById("title").innerText = asset.name;
+    if(!asset){
+        document.getElementById("title").innerText = "Asset Not Found";
+        return;
+    }
+
+    document.getElementById("previewImg").src = asset.preview;
+    document.getElementById("title").innerText = asset.title;
 
     document.getElementById("lowDownload").onclick = () => {
-        window.location.href = asset.image;
+        window.location.href = asset.download_low;
     };
 
     document.getElementById("highDownload").onclick = () => {
-        alert("Watch ad to unlock HQ Download");
+        alert("Watch ad to unlock high quality");
 
         setTimeout(() => {
-            window.location.href = asset.highQuality;
+            window.location.href = asset.download_high;
         }, 5000);
     };
 
-    document.getElementById("shareBtn").onclick = () => {
-        navigator.share({
-            title: asset.name,
-            url: window.location.href
-        });
+    document.getElementById("shareBtn").onclick = async () => {
+        if(navigator.share){
+            await navigator.share({
+                title: asset.title,
+                url: window.location.href
+            });
+        }
     };
 
-});
+})
+.catch(error => console.log(error));
