@@ -9,8 +9,10 @@
 </head>
 <body>
 
+<!-- Header -->
 <header>
     <nav class="navbar">
+
         <div class="logo">AI Assets Hub</div>
 
         <ul class="nav-links" id="navLinks">
@@ -20,52 +22,94 @@
         </ul>
 
         <div class="menu-btn" id="menuBtn">☰</div>
+
     </nav>
 </header>
 
+<!-- Hero Section -->
 <section class="hero">
+
     <h1>Find Premium Assets & Generate AI Designs</h1>
-    <p>PNG, JPG, 3D Models, Transparent Assets and AI Generated Content</p>
+
+    <p>
+        PNG, JPG, 3D Models, Transparent Assets and AI Generated Content
+    </p>
 
     <div class="search-box">
         <input type="text" id="searchBox" placeholder="Search assets...">
         <button id="searchBtn">Search</button>
     </div>
+
 </section>
 
+<!-- Categories -->
 <section class="categories">
+
     <h2>Popular Categories</h2>
 
     <div class="category-grid">
-       <div class="category-card" data-type="png">PNG</div>
-       <div class="category-card" data-type="jpg">JPG</div>
-       <div class="category-card" data-type="3d">3D Models</div>
-       <div class="category-card" data-type="transparent">Transparent</div>
-       <div class="category-card" data-type="background">Backgrounds</div>
-       <div class="category-card" data-type="icons">Icons</div>
+
+        <div class="category-card" onclick="window.location.href='pages/assets.html?filter=png'">
+            PNG
+        </div>
+
+        <div class="category-card" onclick="window.location.href='pages/assets.html?filter=jpg'">
+            JPG
+        </div>
+
+        <div class="category-card" onclick="window.location.href='pages/assets.html?filter=3d'">
+            3D Models
+        </div>
+
+        <div class="category-card" onclick="window.location.href='pages/assets.html?filter=transparent'">
+            Transparent
+        </div>
+
+        <div class="category-card" onclick="window.location.href='pages/assets.html?filter=background'">
+            Backgrounds
+        </div>
+
+        <div class="category-card" onclick="window.location.href='pages/assets.html?filter=icons'">
+            Icons
+        </div>
+
     </div>
+
 </section>
 
+<!-- Latest Assets -->
 <section class="assets-section">
+
     <h2>Latest Assets</h2>
 
-    <div class="asset-grid" id="assetContainer">
-    </div>
+    <div class="asset-grid" id="homeAssetsContainer"></div>
+
 </section>
 
+<!-- AI Banner -->
 <section class="ai-banner">
+
     <h2>Create Custom Assets with AI</h2>
-    <p>Generate PNG, JPG, Transparent Background and 3D concepts instantly.</p>
-    <button onclick="window.location.href='pages/ai.html'">Generate Now</button>
+
+    <p>
+        Generate PNG, JPG, Transparent Background and 3D concepts instantly.
+    </p>
+
+    <button onclick="window.location.href='pages/ai.html'">
+        Generate Now
+    </button>
+
 </section>
 
+<!-- Footer -->
 <footer>
     <p>© 2026 AI Assets Hub | All Rights Reserved</p>
 </footer>
 
+<!-- Scripts -->
 <script src="js/menu.js"></script>
 <script src="js/search.js"></script>
-<script src="js/assets.js"></script>
+<script src="js/home-assets.js"></script>
 
 </body>
 </html>
