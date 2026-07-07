@@ -1,1 +1,219 @@
+/* ==========================
+   AI Generator CSS
+========================== */
 
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+    color:#222;
+}
+
+/* Main Container */
+
+.generator-container{
+    max-width:1400px;
+    margin:50px auto;
+    display:grid;
+    grid-template-columns:1fr 500px;
+    gap:40px;
+    padding:20px;
+}
+
+/* Left Card */
+
+.left-panel{
+    background:#fff;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 10px 35px rgba(0,0,0,.08);
+}
+
+.left-panel h2{
+    font-size:34px;
+    margin-bottom:15px;
+}
+
+.left-panel p{
+    color:#777;
+    margin-bottom:30px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+/* Prompt */
+
+textarea{
+    width:100%;
+    height:170px;
+    resize:none;
+    border:1px solid #ddd;
+    border-radius:14px;
+    padding:15px;
+    font-size:16px;
+    margin-bottom:20px;
+}
+
+textarea:focus{
+    outline:none;
+    border-color:#6C63FF;
+}
+
+/* Select */
+
+select,
+input[type="text"]{
+
+    width:100%;
+    height:50px;
+
+    border:1px solid #ddd;
+    border-radius:12px;
+
+    padding:0 15px;
+    margin-bottom:20px;
+    font-size:15px;
+}
+
+.row{
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+/* Checkbox */
+
+.check{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+/* Button */
+
+.generate-btn{
+
+    width:100%;
+    height:60px;
+
+    border:none;
+    border-radius:14px;
+
+    background:linear-gradient(90deg,#6C63FF,#3B82F6);
+
+    color:#fff;
+    font-size:18px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.generate-btn:hover{
+
+    transform:translateY(-2px);
+}
+
+/* Right Panel */
+
+.right-panel{
+
+    background:#fff;
+    border-radius:20px;
+    padding:30px;
+
+    box-shadow:0 10px 35px rgba(0,0,0,.08);
+
+    display:flex;
+    flex-direction:column;
+}
+
+.preview{
+
+    flex:1;
+
+    min-height:500px;
+
+    border:2px dashed #bbb;
+
+    border-radius:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#fafafa;
+}
+
+.preview img{
+
+    width:100%;
+    border-radius:15px;
+}
+
+.preview-text{
+
+    color:#888;
+    text-align:center;
+    font-size:18px;
+}
+
+.actions{
+
+    margin-top:25px;
+
+    display:flex;
+
+    gap:15px;
+}
+
+.actions button{
+
+    flex:1;
+
+    height:50px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    background:#eee;
+
+    font-size:15px;
+}
+
+.actions button:hover{
+
+    background:#ddd;
+}
+
+/* Responsive */
+
+@media(max-width:1000px){
+
+.generator-container{
+
+grid-template-columns:1fr;
+
+}
+
+.right-panel{
+
+min-height:450px;
+
+}
+
+}
