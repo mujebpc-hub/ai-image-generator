@@ -7,56 +7,77 @@ const promptInput = document.getElementById("promptInput");
 const styleSelect = document.getElementById("styleSelect");
 const transparentBg = document.getElementById("transparentBg");
 
-// Generate Logic
-generateBtn.addEventListener("click", () => {
+generateBtn.addEventListener("click", async () => {
 
-```
-let prompt = promptInput.value.trim();
-let style = styleSelect.value;
-let transparent = transparentBg.checked;
+    const prompt = promptInput.value.trim();
+    const style = styleSelect.value;
+    const transparent = transparentBg.checked;
 
-if(prompt === ""){
-    alert("Please enter a prompt.");
-    return;
-}
+    if (!prompt) {
+        alert("Please enter a prompt.");
+        return;
+    }
 
-// Show loader
-loader.style.display = "block";
-outputBox.style.display = "none";
+    generateBtn.disabled = true;
+    loader.style.display = "block";
+    outputBox.style.display = "none";
 
-// Fake AI processing
-setTimeout(() => {
+    try {
 
-    loader.style.display = "none";
-    outputBox.style.display = "block";
+        let finalPrompt = prompt;
 
-    // Temporary preview switch
-   const finalPrompt = encodeURIComponent(`${prompt}, ${style}`);
+        if (style !== "none") {
+            finalPrompt += ", " + style + " style";
+        }
 
-const imageUrl =
-`https://image.pollinations.ai/prompt/${finalPrompt}`;
+        if (transparent) {
+            finalPrompt += ", transparent background";
+        }
 
-generatedImage.src = imageUrl;
+        // Random value so browser doesn't cache old image
+        const seed = Date.now();
 
-    console.log("Prompt:", prompt);
-    console.log("Style:", style);
-    console.log("Transparent:", transparent);
+        const imageUrl =
+            `https://image.pollinations.ai/prompt/${encodeURIComponent(finalPrompt)}?seed=${seed}`;
 
-}, 3000);
-```
+        generatedImage.onload = () => {
+            loader.style.display = "none";
+            outputBox.style.display = "block";
+            generateBtn.disabled = false;
+        };
+
+        generatedImage.onerror = () => {
+            loader.style.display = "none";
+            generateBtn.disabled = false;
+            alert("Image generation failed. Please try again.");
+        };
+
+        generatedImage.src = imageUrl;
+
+    } catch (err) {
+
+        loader.style.display = "none";
+        generateBtn.disabled = false;
+
+        console.error(err);
+
+        alert("Something went wrong.");
+
+    }
 
 });
 
-// Download Logic
 downloadBtn.addEventListener("click", () => {
-let imageURL = generatedImage.src;
 
-```
-const link = document.createElement("a");
-link.href = imageURL;
-link.download = "generated-asset.png";
-link.click();
-```
+    const link = document.createElement("a");
+
+    link.href = generatedImage.src;
+    link.download = "AI-Image.png";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
 
 });
-
