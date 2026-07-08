@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Generator</title>
+    <title>AI Image Generator | AI Assets Hub</title>
 
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/ai.css">
@@ -11,44 +11,161 @@
 <body>
 
 <header>
-    <nav>
-        <div class="logo">AI Assets Hub</div>
+    <nav class="navbar">
+
+        <div class="logo">
+            AI Assets Hub
+        </div>
 
         <div id="menuBtn">☰</div>
 
         <ul id="navLinks">
             <li><a href="../index.html">Home</a></li>
             <li><a href="assets.html">Assets</a></li>
-            <li><a href="ai.html">AI Generator</a></li>
+            <li><a href="ai.html" class="active">AI Generator</a></li>
         </ul>
+
     </nav>
 </header>
 
-<section class="ai-box">
+<section class="ai-generator">
 
-    <textarea id="promptInput" placeholder="Describe your image..."></textarea>
+    <!-- LEFT PANEL -->
 
-    <select id="ratioSelect">
-        <option value="1:1">1:1 Square</option>
-        <option value="16:9">16:9 Landscape</option>
-        <option value="9:16">9:16 Portrait</option>
-        <option value="4:5">4:5 Social</option>
-    </select>
+    <div class="left-panel">
 
-    <div class="toggle-box">
-        <label>Transparent Background</label>
-        <input type="checkbox" id="transparentToggle">
+        <h2>AI Image Generator</h2>
+
+        <p class="subtitle">
+            Describe anything and generate AI images.
+        </p>
+
+        <label>Prompt</label>
+
+        <textarea
+            id="promptInput"
+            placeholder="Example: A futuristic city at sunset, ultra realistic, cinematic lighting..."
+        ></textarea>
+
+        <label>Style</label>
+
+        <select id="styleSelect">
+
+            <option value="realistic">Realistic</option>
+
+            <option value="3d render">3D Render</option>
+
+            <option value="anime">Anime</option>
+
+            <option value="cartoon">Cartoon</option>
+
+            <option value="pixel art">Pixel Art</option>
+
+            <option value="logo">Logo</option>
+
+            <option value="minimal">Minimal</option>
+
+        </select>
+
+        <label>Aspect Ratio</label>
+
+        <select id="ratioSelect">
+
+            <option value="1:1">1 : 1 Square</option>
+
+            <option value="16:9">16 : 9 Landscape</option>
+
+            <option value="9:16">9 : 16 Portrait</option>
+
+            <option value="4:5">4 : 5 Social</option>
+
+            <option value="3:2">3 : 2</option>
+
+            <option value="2:3">2 : 3</option>
+
+        </select>
+
+        <label>Quality</label>
+
+        <select id="qualitySelect">
+
+            <option value="standard">Standard</option>
+
+            <option value="hd">HD</option>
+
+        </select>
+
+        <label>Image Count</label>
+
+        <select id="countSelect">
+
+            <option value="1">1 Image</option>
+
+            <option value="2">2 Images</option>
+
+            <option value="4">4 Images</option>
+
+        </select>
+
+        <div class="toggle-row">
+
+            <label for="transparentToggle">
+                Transparent Background
+            </label>
+
+            <input
+                type="checkbox"
+                id="transparentToggle"
+            >
+
+        </div>
+
+        <button id="generateBtn">
+
+            Generate Image
+
+        </button>
+
     </div>
 
-    <button id="generateBtn" class="primary-btn">Generate</button>
+    <!-- RIGHT PANEL -->
 
-    <div id="loadingText" style="display:none;">
-        Generating...
-    </div>
+    <div class="right-panel">
 
-    <div id="outputBox" style="display:none;">
-        <img id="generatedImage" src="" alt="Generated Image">
-        <button id="downloadBtn" class="primary-btn">Download</button>
+        <div id="loadingText">
+
+            <div class="loader"></div>
+
+            <p>Generating Image...</p>
+
+        </div>
+
+        <div id="outputBox">
+
+            <img
+                id="generatedImage"
+                src="../assets/previews/sample1.png"
+                alt="Generated Image"
+            >
+
+            <div class="buttons">
+
+                <button id="downloadBtn">
+
+                    Download
+
+                </button>
+
+                <button id="generateAgainBtn">
+
+                    Generate Again
+
+                </button>
+
+            </div>
+
+        </div>
+
     </div>
 
 </section>
