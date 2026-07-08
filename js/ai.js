@@ -31,15 +31,12 @@ setTimeout(() => {
     outputBox.style.display = "block";
 
     // Temporary preview switch
-    if(style === "3d"){
-        generatedImage.src = "../assets/previews/model1.png";
-    }else if(style === "cartoon"){
-        generatedImage.src = "../assets/previews/sample2.png";
-    }else if(style === "minimal"){
-        generatedImage.src = "../assets/previews/sample3.jpg";
-    }else{
-        generatedImage.src = "../assets/previews/sample1.png";
-    }
+   const finalPrompt = encodeURIComponent(`${prompt}, ${style}`);
+
+const imageUrl =
+`https://image.pollinations.ai/prompt/${finalPrompt}`;
+
+generatedImage.src = imageUrl;
 
     console.log("Prompt:", prompt);
     console.log("Style:", style);
