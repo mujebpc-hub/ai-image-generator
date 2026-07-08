@@ -1,83 +1,95 @@
-const generateBtn = document.getElementById("generateBtn");
-const loader = document.getElementById("loader");
-const outputBox = document.getElementById("outputBox");
-const generatedImage = document.getElementById("generatedImage");
-const downloadBtn = document.getElementById("downloadBtn");
 const promptInput = document.getElementById("promptInput");
 const styleSelect = document.getElementById("styleSelect");
-const transparentBg = document.getElementById("transparentBg");
+const ratioSelect = document.getElementById("ratioSelect");
+const qualitySelect = document.getElementById("qualitySelect");
+const countSelect = document.getElementById("countSelect");
+const transparentToggle = document.getElementById("transparentToggle");
 
-generateBtn.addEventListener("click", async () => {
+const generateBtn = document.getElementById("generateBtn");
+const generateAgainBtn = document.getElementById("generateAgainBtn");
 
-    const prompt = promptInput.value.trim();
-    const style = styleSelect.value;
-    const transparent = transparentBg.checked;
+const loadingText = document.getElementById("loadingText");
+const outputBox = document.getElementById("outputBox");
 
-    if (!prompt) {
+const generatedImage = document.getElementById("generatedImage");
+const downloadBtn = document.getElementById("downloadBtn");
+
+async function generateImage() {
+
+    let prompt = promptInput.value.trim();
+
+    if(prompt===""){
         alert("Please enter a prompt.");
         return;
     }
 
-    generateBtn.disabled = true;
-    loader.style.display = "block";
-    outputBox.style.display = "none";
+    let style = styleSelect.value;
+    let ratio = ratioSelect.value;
+    let quality = qualitySelect.value;
+    let transparent = transparentToggle.checked;
 
-    try {
+    let finalPrompt = prompt;
 
-        let finalPrompt = prompt;
+    finalPrompt += ", " + style;
 
-        if (style !== "none") {
-            finalPrompt += ", " + style + " style";
-        }
+    finalPrompt += ", aspect ratio " + ratio;
 
-        if (transparent) {
-            finalPrompt += ", transparent background";
-        }
-
-        // Random value so browser doesn't cache old image
-        const seed = Date.now();
-
-        const imageUrl =
-            `https://image.pollinations.ai/prompt/${encodeURIComponent(finalPrompt)}?seed=${seed}`;
-
-        generatedImage.onload = () => {
-            loader.style.display = "none";
-            outputBox.style.display = "block";
-            generateBtn.disabled = false;
-        };
-
-        generatedImage.onerror = () => {
-            loader.style.display = "none";
-            generateBtn.disabled = false;
-            alert("Image generation failed. Please try again.");
-        };
-
-        generatedImage.src = imageUrl;
-
-    } catch (err) {
-
-        loader.style.display = "none";
-        generateBtn.disabled = false;
-
-        console.error(err);
-
-        alert("Something went wrong.");
-
+    if(quality==="hd"){
+        finalPrompt += ", ultra detailed, 8k";
     }
 
-});
+    if(transparent){
+        finalPrompt += ", transparent background";
+    }
 
-downloadBtn.addEventListener("click", () => {
+    loadingText.style.display="block";
+    outputBox.style.display="none";
 
-    const link = document.createElement("a");
+    generateBtn.disabled=true;
 
-    link.href = generatedImage.src;
-    link.download = "AI-Image.png";
+    const seed=Math.floor(Math.random()*999999999);
 
-    document.body.appendChild(link);
+    const imageURL=
+`https://image.pollinations.ai/prompt/${encodeURIComponent(finalPrompt)}?seed=${seed}`;
 
-    link.click();
+    generatedImage.onload=function(){
 
-    document.body.removeChild(link);
+        loadingText.style.display="none";
+        outputBox.style.display="block";
+
+        generateBtn.disabled=false;
+
+    };
+
+    generatedImage.onerror=function(){
+
+        loadingText.style.display="none";
+        generateBtn.disabled=false;
+
+        alert("Failed to generate image.");
+
+    };
+
+    generatedImage.src=imageURL;
+
+}
+
+generateBtn.addEventListener("click",generateImage);
+
+generateAgainBtn.addEventListener("click",generateImage);
+
+downloadBtn.addEventListener("click",()=>{
+
+    const a=document.createElement("a");
+
+    a.href=generatedImage.src;
+
+    a.download="AI_Image.png";
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    document.body.removeChild(a);
 
 });
