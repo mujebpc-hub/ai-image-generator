@@ -1,3 +1,6 @@
+import { generateImage } from "../providers/image/manager.js";
+import { APP_CONFIG } from "./config.js";
+
 const promptInput = document.getElementById("promptInput");
 const styleSelect = document.getElementById("styleSelect");
 const ratioSelect = document.getElementById("ratioSelect");
@@ -47,11 +50,12 @@ async function generateImage() {
 
     generateBtn.disabled=true;
 
-    const seed=Math.floor(Math.random()*999999999);
-
-    const imageURL=
-`https://image.pollinations.ai/prompt/${encodeURIComponent(finalPrompt)}?seed=${seed}`;
-
+    const imageURL = await generateImage(finalPrompt, {
+    style,
+    ratio,
+    quality,
+    transparent
+});
     generatedImage.onload=function(){
 
         loadingText.style.display="none";
