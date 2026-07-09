@@ -1,6 +1,3 @@
-import { generateImage as generateAIImage } from "../providers/image/manager.js";
-import { APP_CONFIG } from "./config.js";
-
 const promptInput = document.getElementById("promptInput");
 const styleSelect = document.getElementById("styleSelect");
 const ratioSelect = document.getElementById("ratioSelect");
@@ -21,7 +18,7 @@ async function generateImage() {
 
     let prompt = promptInput.value.trim();
 
-    if (prompt === "") {
+    if(prompt===""){
         alert("Please enter a prompt.");
         return;
     }
@@ -34,64 +31,65 @@ async function generateImage() {
     let finalPrompt = prompt;
 
     finalPrompt += ", " + style;
+
     finalPrompt += ", aspect ratio " + ratio;
 
-    if (quality === "hd") {
+    if(quality==="hd"){
         finalPrompt += ", ultra detailed, 8k";
     }
 
-    if (transparent) {
+    if(transparent){
         finalPrompt += ", transparent background";
     }
 
-    loadingText.style.display = "block";
-    outputBox.style.display = "none";
-    generateBtn.disabled = true;
+    loadingText.style.display="block";
+    outputBox.style.display="none";
 
-    try {
+    generateBtn.disabled=true;
 
-        const imageURL = await generateAIImage(finalPrompt, {
-            style,
-            ratio,
-            quality,
-            transparent
-        });
+    const seed=Math.floor(Math.random()*999999999);
 
-        generatedImage.onload = function () {
-            loadingText.style.display = "none";
-            outputBox.style.display = "block";
-            generateBtn.disabled = false;
-        };
+    const imageURL=
+`https://image.pollinations.ai/prompt/${encodeURIComponent(finalPrompt)}?seed=${seed}`;
 
-        generatedImage.onerror = function () {
-            loadingText.style.display = "none";
-            generateBtn.disabled = false;
-            alert("Failed to generate image.");
-        };
+    generatedImage.onload=function(){
 
-        generatedImage.src = imageURL;
+        loadingText.style.display="none";
+        outputBox.style.display="block";
 
-    } catch (error) {
-        console.error(error);
-        loadingText.style.display = "none";
-        generateBtn.disabled = false;
-        alert("Something went wrong.");
-    }
+        generateBtn.disabled=false;
+
+    };
+
+    generatedImage.onerror=function(){
+
+        loadingText.style.display="none";
+        generateBtn.disabled=false;
+
+        alert("Failed to generate image.");
+
+    };
+
+    generatedImage.src=imageURL;
 
 }
 
-generateBtn.addEventListener("click", generateImage);
-generateAgainBtn.addEventListener("click", generateImage);
+generateBtn.addEventListener("click",generateImage);
 
-downloadBtn.addEventListener("click", () => {
+generateAgainBtn.addEventListener("click",generateImage);
 
-    const a = document.createElement("a");
+downloadBtn.addEventListener("click",()=>{
 
-    a.href = generatedImage.src;
-    a.download = "AI_Image.png";
+    const a=document.createElement("a");
+
+    a.href=generatedImage.src;
+
+    a.download="AI_Image.png";
 
     document.body.appendChild(a);
+
     a.click();
+
     document.body.removeChild(a);
 
 });
