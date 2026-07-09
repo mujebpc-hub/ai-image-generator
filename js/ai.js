@@ -1,4 +1,4 @@
-import { generateImage } from "../providers/image/manager.js";
+import { generateImage as generateAIImage } from "../providers/image/manager.js";
 import { APP_CONFIG } from "./config.js";
 
 const promptInput = document.getElementById("promptInput");
