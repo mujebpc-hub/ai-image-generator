@@ -6,12 +6,582 @@
     <title>AI Assets Hub</title>
 
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --bg: #070914;
+            --bg-soft: #0d1024;
+            --text: #f7f9ff;
+            --muted: #aeb8d7;
+            --cyan: #22d3ee;
+            --blue: #4f8cff;
+            --purple: #9b5cff;
+            --pink: #e879f9;
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-strong: rgba(255, 255, 255, 0.13);
+            --border: rgba(255, 255, 255, 0.16);
+            --shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 15% 10%, rgba(79, 140, 255, 0.24), transparent 28rem),
+                radial-gradient(circle at 86% 18%, rgba(155, 92, 255, 0.24), transparent 30rem),
+                radial-gradient(circle at 58% 82%, rgba(34, 211, 238, 0.15), transparent 28rem),
+                var(--bg);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            background: rgba(7, 9, 20, 0.72);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+        }
+
+        .navbar {
+            width: min(1180px, calc(100% - 32px));
+            min-height: 76px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .logo {
+            font-size: clamp(1.15rem, 2vw, 1.45rem);
+            font-weight: 800;
+            letter-spacing: 0;
+            background: linear-gradient(120deg, #ffffff, var(--cyan), var(--purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .nav-links a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 40px;
+            padding: 0 14px;
+            color: var(--muted);
+            border: 1px solid transparent;
+            border-radius: 999px;
+            transition: color 180ms ease, background 180ms ease, border-color 180ms ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus-visible {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.14);
+            outline: none;
+        }
+
+        .menu-btn {
+            display: none;
+            width: 42px;
+            height: 42px;
+            place-items: center;
+            color: var(--text);
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .hero {
+            position: relative;
+            isolation: isolate;
+            min-height: clamp(560px, 72vh, 780px);
+            display: grid;
+            place-items: center;
+            padding: 96px 16px 86px;
+            overflow: hidden;
+            background:
+                linear-gradient(135deg, rgba(34, 211, 238, 0.12), rgba(155, 92, 255, 0.14), rgba(79, 140, 255, 0.1)),
+                radial-gradient(circle at 30% 24%, rgba(34, 211, 238, 0.22), transparent 24rem),
+                radial-gradient(circle at 78% 42%, rgba(155, 92, 255, 0.22), transparent 25rem);
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            width: 18rem;
+            height: 18rem;
+            border-radius: 999px;
+            filter: blur(12px);
+            opacity: 0.6;
+            animation: floatGlow 9s ease-in-out infinite;
+        }
+
+        .hero::before {
+            top: 16%;
+            left: max(24px, 10vw);
+            background: radial-gradient(circle, rgba(34, 211, 238, 0.4), transparent 68%);
+        }
+
+        .hero::after {
+            right: max(24px, 10vw);
+            bottom: 12%;
+            background: radial-gradient(circle, rgba(155, 92, 255, 0.44), transparent 68%);
+            animation-delay: -4s;
+        }
+
+        @keyframes floatGlow {
+            0%, 100% {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+            50% {
+                transform: translate3d(18px, -22px, 0) scale(1.08);
+            }
+        }
+
+        .hero-content {
+            width: min(980px, 100%);
+            padding: clamp(28px, 6vw, 58px);
+            text-align: center;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06));
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 28px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(22px);
+        }
+
+        .hero h1 {
+            max-width: 860px;
+            margin: 0 auto;
+            font-size: clamp(2.4rem, 7vw, 5.7rem);
+            line-height: 1;
+            letter-spacing: 0;
+        }
+
+        .hero p {
+            max-width: 690px;
+            margin: 24px auto 0;
+            color: var(--muted);
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            line-height: 1.7;
+        }
+
+        .search-box {
+            width: min(720px, 100%);
+            margin: 36px auto 0;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(5, 8, 20, 0.68);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 18px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        .search-box input {
+            width: 100%;
+            min-height: 54px;
+            padding: 0 18px;
+            color: var(--text);
+            background: transparent;
+            border: 0;
+            outline: 0;
+            font-size: 1rem;
+        }
+
+        .search-box input::placeholder {
+            color: rgba(174, 184, 215, 0.72);
+        }
+
+        .search-box button,
+        .ai-banner button {
+            min-height: 54px;
+            padding: 0 24px;
+            color: #ffffff;
+            font-weight: 800;
+            border: 0;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--blue), var(--purple), var(--cyan));
+            box-shadow: 0 14px 34px rgba(79, 140, 255, 0.3);
+            cursor: pointer;
+            transition: transform 180ms ease, box-shadow 180ms ease;
+        }
+
+        .search-box button:hover,
+        .ai-banner button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 40px rgba(34, 211, 238, 0.3);
+        }
+
+        main {
+            position: relative;
+        }
+
+        .section {
+            width: min(1180px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 88px 0;
+        }
+
+        .section-header {
+            max-width: 720px;
+            margin-bottom: 34px;
+        }
+
+        .section-kicker {
+            margin: 0 0 12px;
+            color: var(--cyan);
+            font-size: 0.82rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .section h2 {
+            margin: 0;
+            font-size: clamp(2rem, 4vw, 3.3rem);
+            letter-spacing: 0;
+        }
+
+        .section-header p {
+            margin: 16px 0 0;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .services-grid,
+        .tutorial-grid,
+        .future-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .service-card,
+        .tutorial-card,
+        .placeholder-card {
+            position: relative;
+            overflow: hidden;
+            min-height: 100%;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.045));
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+            transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+            backdrop-filter: blur(16px);
+        }
+
+        .service-card::before,
+        .tutorial-card::before,
+        .placeholder-card::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            z-index: -1;
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.42), rgba(155, 92, 255, 0.3), rgba(79, 140, 255, 0));
+            opacity: 0;
+            transition: opacity 220ms ease;
+        }
+
+        .service-card:hover,
+        .tutorial-card:hover,
+        .placeholder-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(34, 211, 238, 0.42);
+            box-shadow: 0 24px 70px rgba(34, 211, 238, 0.14);
+        }
+
+        .service-card:hover::before,
+        .tutorial-card:hover::before,
+        .placeholder-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            color: var(--text);
+        }
+
+        .preview,
+        .tutorial-thumb {
+            position: relative;
+            min-height: 168px;
+            background:
+                radial-gradient(circle at 24% 26%, rgba(34, 211, 238, 0.34), transparent 8rem),
+                radial-gradient(circle at 74% 38%, rgba(155, 92, 255, 0.38), transparent 9rem),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+        }
+
+        .preview::after {
+            content: "";
+            position: absolute;
+            inset: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 18px;
+            background:
+                linear-gradient(90deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+                linear-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px);
+            background-size: 22px 22px;
+            opacity: 0.45;
+        }
+
+        .preview-label {
+            position: absolute;
+            left: 22px;
+            bottom: 20px;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            min-height: 32px;
+            padding: 0 12px;
+            color: rgba(255, 255, 255, 0.9);
+            background: rgba(7, 9, 20, 0.68);
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
+        .card-copy {
+            padding: 24px;
+        }
+
+        .card-copy h3,
+        .tutorial-card h3,
+        .placeholder-card h3 {
+            margin: 0;
+            font-size: 1.26rem;
+            letter-spacing: 0;
+        }
+
+        .card-copy p,
+        .tutorial-card p,
+        .placeholder-card p {
+            margin: 12px 0 0;
+            color: var(--muted);
+            line-height: 1.65;
+        }
+
+        .tutorial-card {
+            min-height: 320px;
+        }
+
+        .tutorial-thumb {
+            min-height: 178px;
+        }
+
+        .play-button {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            display: grid;
+            width: 62px;
+            height: 62px;
+            place-items: center;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            border-radius: 999px;
+            box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
+            transform: translate(-50%, -50%);
+            backdrop-filter: blur(14px);
+        }
+
+        .play-button::before {
+            content: "";
+            width: 0;
+            height: 0;
+            margin-left: 5px;
+            border-top: 11px solid transparent;
+            border-bottom: 11px solid transparent;
+            border-left: 17px solid currentColor;
+        }
+
+        .tutorial-card h3,
+        .tutorial-card p {
+            padding-right: 24px;
+            padding-left: 24px;
+        }
+
+        .tutorial-card h3 {
+            padding-top: 24px;
+        }
+
+        .tutorial-card p {
+            padding-bottom: 28px;
+        }
+
+        .coming-soon {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            z-index: 2;
+            min-height: 30px;
+            padding: 6px 10px;
+            color: #ffffff;
+            background: rgba(155, 92, 255, 0.56);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 999px;
+            font-size: 0.74rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .future-section {
+            width: 100%;
+            padding: 88px 0;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(34, 211, 238, 0.04));
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .future-inner {
+            width: min(1180px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        .placeholder-card {
+            min-height: 220px;
+            padding: 24px;
+        }
+
+        .placeholder-card .bar {
+            width: 100%;
+            height: 92px;
+            margin-bottom: 22px;
+            border-radius: 18px;
+            background:
+                linear-gradient(90deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08)),
+                linear-gradient(135deg, rgba(79, 140, 255, 0.2), rgba(155, 92, 255, 0.16));
+            background-size: 220% 100%, 100% 100%;
+            animation: shimmer 3.2s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% {
+                background-position: 0 0, 0 0;
+            }
+            50% {
+                background-position: 100% 0, 0 0;
+            }
+        }
+
+        footer {
+            padding: 34px 16px;
+            color: var(--muted);
+            text-align: center;
+            background: rgba(5, 7, 16, 0.82);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        @media (max-width: 900px) {
+            .services-grid,
+            .tutorial-grid,
+            .future-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 720px) {
+            .navbar {
+                min-height: 68px;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 68px;
+                left: 16px;
+                right: 16px;
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+                padding: 12px;
+                background: rgba(7, 9, 20, 0.94);
+                border: 1px solid var(--border);
+                border-radius: 18px;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.active,
+            .nav-links.show,
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                justify-content: center;
+                border-radius: 12px;
+            }
+
+            .menu-btn {
+                display: grid;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 68px 16px 60px;
+            }
+
+            .hero-content {
+                border-radius: 22px;
+            }
+
+            .search-box {
+                grid-template-columns: 1fr;
+            }
+
+            .section,
+            .future-section {
+                padding: 62px 0;
+            }
+
+            .services-grid,
+            .tutorial-grid,
+            .future-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <!-- Header -->
 <header>
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Primary navigation">
 
         <div class="logo">AI Assets Hub</div>
 
@@ -21,85 +591,165 @@
             <li><a href="pages/ai.html">AI Generator</a></li>
         </ul>
 
-        <div class="menu-btn" id="menuBtn">☰</div>
+        <div class="menu-btn" id="menuBtn" role="button" tabindex="0" aria-label="Open navigation menu">☰</div>
 
     </nav>
 </header>
 
-<!-- Hero Section -->
-<section class="hero">
+<main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Find Premium Assets &amp; Generate AI Designs</h1>
 
-    <h1>Find Premium Assets & Generate AI Designs</h1>
+            <p>
+                PNG, JPG, 3D Models, Transparent Assets and AI Generated Content
+            </p>
 
-    <p>
-        PNG, JPG, 3D Models, Transparent Assets and AI Generated Content
-    </p>
+            <div class="search-box">
+                <input type="text" id="searchBox" placeholder="Search assets..." aria-label="Search assets">
+                <button id="searchBtn" type="button">Search</button>
+            </div>
+        </div>
+    </section>
 
-    <div class="search-box">
-        <input type="text" id="searchBox" placeholder="Search assets...">
-        <button id="searchBtn">Search</button>
-    </div>
-
-</section>
-
-<!-- Categories -->
-<section class="categories">
-
-    <h2>Popular Categories</h2>
-
-    <div class="category-grid">
-
-        <div class="category-card" onclick="window.location.href='pages/assets.html?filter=png'">
-            PNG
+    <!-- Featured AI Services -->
+    <section class="section services-section" aria-labelledby="featuredServicesTitle">
+        <div class="section-header">
+            <p class="section-kicker">Featured AI Services</p>
+            <h2 id="featuredServicesTitle">Create, browse, and download premium-ready assets.</h2>
+            <p>Jump into asset categories or launch AI tools from a polished service grid built for fast discovery.</p>
         </div>
 
-        <div class="category-card" onclick="window.location.href='pages/assets.html?filter=jpg'">
-            JPG
+        <div class="services-grid">
+            <a class="service-card" href="pages/assets.html?filter=png">
+                <div class="preview">
+                    <span class="preview-label">Video Preview</span>
+                </div>
+                <div class="card-copy">
+                    <h3>PNG Assets</h3>
+                    <p>Transparent, production-ready PNG visuals for apps, thumbnails, and social content.</p>
+                </div>
+            </a>
+
+            <a class="service-card" href="pages/assets.html?filter=jpg">
+                <div class="preview">
+                    <span class="preview-label">Video Preview</span>
+                </div>
+                <div class="card-copy">
+                    <h3>JPG Assets</h3>
+                    <p>High-quality JPG backgrounds, references, and design resources for every project.</p>
+                </div>
+            </a>
+
+            <a class="service-card" href="pages/assets.html?filter=3d">
+                <div class="preview">
+                    <span class="preview-label">Video Preview</span>
+                </div>
+                <div class="card-copy">
+                    <h3>3D Models</h3>
+                    <p>Explore modern 3D concepts and model previews for product scenes and creative builds.</p>
+                </div>
+            </a>
+
+            <a class="service-card" href="pages/ai.html">
+                <div class="preview">
+                    <span class="preview-label">Video Preview</span>
+                </div>
+                <div class="card-copy">
+                    <h3>AI Image Generator</h3>
+                    <p>Generate custom images, transparent concepts, and creative variations in seconds.</p>
+                </div>
+            </a>
+
+            <a class="service-card" href="pages/video.html">
+                <span class="coming-soon">Future</span>
+                <div class="preview">
+                    <span class="preview-label">Video Preview</span>
+                </div>
+                <div class="card-copy">
+                    <h3>AI Video Generator</h3>
+                    <p>A future space for motion assets, short clips, and AI-powered video generation.</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Tutorial Showcase -->
+    <section class="section tutorial-section" aria-labelledby="tutorialShowcaseTitle">
+        <div class="section-header">
+            <p class="section-kicker">Tutorial Showcase</p>
+            <h2 id="tutorialShowcaseTitle">Learn the fastest workflows.</h2>
+            <p>Video-style tutorials help users understand how to generate, browse, download, and prepare future video assets.</p>
         </div>
 
-        <div class="category-card" onclick="window.location.href='pages/assets.html?filter=3d'">
-            3D Models
+        <div class="tutorial-grid">
+            <article class="tutorial-card">
+                <div class="tutorial-thumb">
+                    <span class="play-button" aria-hidden="true"></span>
+                </div>
+                <h3>Generate AI Images</h3>
+                <p>Start with a prompt, refine the output, and create custom visuals for your project.</p>
+            </article>
+
+            <article class="tutorial-card">
+                <div class="tutorial-thumb">
+                    <span class="play-button" aria-hidden="true"></span>
+                </div>
+                <h3>Browse Assets</h3>
+                <p>Use categories and search to find PNG, JPG, transparent, and 3D resources quickly.</p>
+            </article>
+
+            <article class="tutorial-card">
+                <div class="tutorial-thumb">
+                    <span class="play-button" aria-hidden="true"></span>
+                </div>
+                <h3>Download Files</h3>
+                <p>Preview assets, choose the best match, and download files for production use.</p>
+            </article>
+
+            <article class="tutorial-card">
+                <span class="coming-soon">Coming Soon</span>
+                <div class="tutorial-thumb">
+                    <span class="play-button" aria-hidden="true"></span>
+                </div>
+                <h3>Create AI Videos</h3>
+                <p>Future tutorials will cover video prompts, scene planning, and generated motion assets.</p>
+            </article>
         </div>
+    </section>
 
-        <div class="category-card" onclick="window.location.href='pages/assets.html?filter=transparent'">
-            Transparent
+    <!-- Future Placeholder Section -->
+    <section class="future-section" aria-labelledby="futureContentTitle">
+        <div class="future-inner">
+            <div class="section-header">
+                <p class="section-kicker">Future Dynamic Content</p>
+                <h2 id="futureContentTitle">Trending, recently added, and recommended assets.</h2>
+                <p>This premium placeholder area is ready for future asset feeds without requiring backend changes today.</p>
+            </div>
+
+            <div class="future-grid" id="homeAssetsContainer">
+                <article class="placeholder-card">
+                    <div class="bar"></div>
+                    <h3>Trending Assets</h3>
+                    <p>Placeholder cards for popular resources and high-demand creative packs.</p>
+                </article>
+
+                <article class="placeholder-card">
+                    <div class="bar"></div>
+                    <h3>Recently Added</h3>
+                    <p>Reserved space for fresh uploads, new AI outputs, and curated collections.</p>
+                </article>
+
+                <article class="placeholder-card">
+                    <div class="bar"></div>
+                    <h3>Recommended Assets</h3>
+                    <p>Future-ready layout for personalized picks and featured downloads.</p>
+                </article>
+            </div>
         </div>
-
-        <div class="category-card" onclick="window.location.href='pages/assets.html?filter=background'">
-            Backgrounds
-        </div>
-
-        <div class="category-card" onclick="window.location.href='pages/assets.html?filter=icons'">
-            Icons
-        </div>
-
-    </div>
-
-</section>
-
-<!-- Latest Assets -->
-<section class="assets-section">
-
-    <h2>Latest Assets</h2>
-
-    <div class="asset-grid" id="homeAssetsContainer"></div>
-
-</section>
-
-<!-- AI Banner -->
-<section class="ai-banner">
-
-    <h2>Create Custom Assets with AI</h2>
-
-    <p>
-        Generate PNG, JPG, Transparent Background and 3D concepts instantly.
-    </p>
-
-    <button onclick="window.location.href='pages/ai.html'">
-        Generate Now
-    </button>
-
-</section>
+    </section>
+</main>
 
 <!-- Footer -->
 <footer>
