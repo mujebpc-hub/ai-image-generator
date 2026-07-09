@@ -21,7 +21,7 @@ async function generateImage() {
 
     let prompt = promptInput.value.trim();
 
-    if(prompt===""){
+    if (prompt === "") {
         alert("Please enter a prompt.");
         return;
     }
@@ -34,66 +34,64 @@ async function generateImage() {
     let finalPrompt = prompt;
 
     finalPrompt += ", " + style;
-
     finalPrompt += ", aspect ratio " + ratio;
 
-    if(quality==="hd"){
+    if (quality === "hd") {
         finalPrompt += ", ultra detailed, 8k";
     }
 
-    if(transparent){
+    if (transparent) {
         finalPrompt += ", transparent background";
     }
 
-    loadingText.style.display="block";
-    outputBox.style.display="none";
+    loadingText.style.display = "block";
+    outputBox.style.display = "none";
+    generateBtn.disabled = true;
 
-    generateBtn.disabled=true;
+    try {
 
-    const imageURL = await generateImage(finalPrompt, {
-    style,
-    ratio,
-    quality,
-    transparent
-});
-    generatedImage.onload=function(){
+        const imageURL = await generateAIImage(finalPrompt, {
+            style,
+            ratio,
+            quality,
+            transparent
+        });
 
-        loadingText.style.display="none";
-        outputBox.style.display="block";
+        generatedImage.onload = function () {
+            loadingText.style.display = "none";
+            outputBox.style.display = "block";
+            generateBtn.disabled = false;
+        };
 
-        generateBtn.disabled=false;
+        generatedImage.onerror = function () {
+            loadingText.style.display = "none";
+            generateBtn.disabled = false;
+            alert("Failed to generate image.");
+        };
 
-    };
+        generatedImage.src = imageURL;
 
-    generatedImage.onerror=function(){
-
-        loadingText.style.display="none";
-        generateBtn.disabled=false;
-
-        alert("Failed to generate image.");
-
-    };
-
-    generatedImage.src=imageURL;
+    } catch (error) {
+        console.error(error);
+        loadingText.style.display = "none";
+        generateBtn.disabled = false;
+        alert("Something went wrong.");
+    }
 
 }
 
-generateBtn.addEventListener("click",generateImage);
+generateBtn.addEventListener("click", generateImage);
+generateAgainBtn.addEventListener("click", generateImage);
 
-generateAgainBtn.addEventListener("click",generateImage);
+downloadBtn.addEventListener("click", () => {
 
-downloadBtn.addEventListener("click",()=>{
+    const a = document.createElement("a");
 
-    const a=document.createElement("a");
-
-    a.href=generatedImage.src;
-
-    a.download="AI_Image.png";
+    a.href = generatedImage.src;
+    a.download = "AI_Image.png";
 
     document.body.appendChild(a);
-
     a.click();
-
     document.body.removeChild(a);
 
 });
